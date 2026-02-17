@@ -1,10 +1,13 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native"
+import { ColorScheme, defaultScheme } from "settup/theme-contexts/theme"
 import { Button } from "components/button"
 import { useState } from "react"
-import globalStyles from "app/styles"
-import styles from "./styles"
+
+import createStyle from "./styles"
+import createGlobalStyle from "app/styles"
 
 export const EditableItem = ({
+  scheme = defaultScheme,
   value = "",
   placeholder = "",
   onRemove,
@@ -13,6 +16,9 @@ export const EditableItem = ({
   onSelected,
 }: EditableItemProps) => {
   const [isEditing, setEditing] = useState<boolean>(false)
+
+  const styles = createStyle(scheme)
+  const globalStyles = createGlobalStyle(scheme)
 
   const onRemoveItem = () => {
     onRemove && onRemove()
@@ -35,6 +41,7 @@ export const EditableItem = ({
     <View style={styles.container}>
       {isEditing ? (
         <ItemEditableState
+          scheme={scheme}
           value={value}
           placeholder={placeholder}
           onRemove={onRemoveItem}
@@ -42,6 +49,7 @@ export const EditableItem = ({
         />
       ) : (
         <ItemDefaultState
+          scheme={scheme}
           value={value}
           onEdit={onInfoEdit}
           onDuplicate={onInfoDuplicate}
@@ -53,12 +61,16 @@ export const EditableItem = ({
 }
 
 const ItemEditableState = ({
+  scheme,
   value,
   placeholder,
   onRemove,
   onSubmit,
 }: ItemEditableStateProps) => {
   const [draft, setDraft] = useState<string>(value)
+
+  const styles = createStyle(scheme)
+  const globalStyles = createGlobalStyle(scheme)
 
   const onInfoSubmit = () => {
     onSubmit && onSubmit(draft)
@@ -84,11 +96,15 @@ const ItemEditableState = ({
 }
 
 const ItemDefaultState = ({
+  scheme,
   value,
   onEdit,
   onDuplicate,
   onSelected,
 }: ItemDefaultState) => {
+  const styles = createStyle(scheme)
+  const globalStyles = createGlobalStyle(scheme)
+
   return (
     <>
       <TouchableHighlight onPress={onSelected}>
@@ -107,6 +123,7 @@ const ItemDefaultState = ({
 }
 
 interface ItemEditableStateProps {
+  scheme: ColorScheme
   value: string
   placeholder: string
   onRemove?: () => void
@@ -114,6 +131,7 @@ interface ItemEditableStateProps {
 }
 
 interface ItemDefaultState {
+  scheme: ColorScheme
   value: string
   onEdit?: () => void
   onDuplicate?: () => void
@@ -121,6 +139,7 @@ interface ItemDefaultState {
 }
 
 export interface EditableItemProps {
+  scheme?: ColorScheme
   value?: string
   placeholder?: string
   onRemove?: () => void

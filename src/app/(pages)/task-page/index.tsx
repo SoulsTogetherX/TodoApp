@@ -1,11 +1,13 @@
 import { ScrollView, FlatList, TouchableHighlight } from "react-native"
 import { useState } from "react"
 import { useRouter } from "expo-router"
-import { Button } from "components/button"
+import { useTheme } from "settup/theme-contexts"
 import { EditableItem, EditableItemProps } from "components/editable-item"
+
 import Entypo from "@expo/vector-icons/Entypo"
-import styles from "./styles"
-import globalStyles from "app/styles"
+
+import createStyle from "./styles"
+import createGlobalStyle from "app/styles"
 
 const DEFAULT_TASK: TaskItemProps = {
   creation_date: 0,
@@ -16,6 +18,10 @@ const DEFAULT_TASK: TaskItemProps = {
 export default function Page() {
   const [items, setItems] = useState<TaskItemProps[]>([])
   const router = useRouter()
+
+  const { theme } = useTheme()
+  const styles = createStyle(theme)
+  const globalStyles = createGlobalStyle(theme)
 
   // Task Operatons
   const addTask = () => {

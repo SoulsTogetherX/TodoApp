@@ -39,3 +39,4 @@ export const getTheme = (scheme: ColorSchemePreset) => {
   return lightTheme
 }
 export const defaultPreset: ColorSchemePreset = "light"
+export const defaultScheme: ColorScheme = getTheme(defaultPreset)

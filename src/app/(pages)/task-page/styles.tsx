@@ -3,9 +3,9 @@ import { ColorScheme } from "settup/theme-contexts/theme"
 
 export default (theme: ColorScheme) =>
   StyleSheet.create({
-    container: { backgroundColor: "#9a9a9a" },
+    container: { backgroundColor: theme.background },
     addIconContainer: {
-      backgroundColor: "#a6518a",
+      backgroundColor: theme.primary,
       position: "absolute",
       bottom: 20,
       right: 20,
@@ -18,7 +18,7 @@ export default (theme: ColorScheme) =>
     },
     addIcon: {
       fontSize: 30,
-      color: "#000",
+      color: theme.text,
       textAlignVertical: "center",
       textAlign: "center",
     },
