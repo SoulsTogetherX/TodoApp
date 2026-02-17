@@ -1,7 +1,7 @@
-import { Slot } from "expo-router";
-import { View, Text } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+import { Slot } from "expo-router"
+import { View, Text } from "react-native"
+import { SafeAreaProvider } from "react-native-safe-area-context"
+import { StatusBar } from "expo-status-bar"
 
 export default function RootLayout() {
   return (
@@ -9,5 +9,5 @@ export default function RootLayout() {
       <Slot />
       <StatusBar style="auto" />
     </SafeAreaProvider>
-  );
+  )
 }
